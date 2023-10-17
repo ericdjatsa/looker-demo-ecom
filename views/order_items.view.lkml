@@ -41,6 +41,8 @@ view: order_items {
     type: number
     # hidden: yes
     sql: ${TABLE}.order_id ;;
+    value_format_name: id
+    drill_fields: [created_date,product_id,sale_price,status]
   }
 
   dimension: product_id {
@@ -60,13 +62,32 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
+  dimension: gross_margin {
+    label: "Gross Margin"
+    type: number
+    value_format_name: usd
+    sql: ${sale_price} - ${inventory_items.cost};;
+  }
+
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
   measure: total_sale_price {
     type: sum
-    sql: ${sale_price} ;;  }
+    sql: ${sale_price} ;;
+    value_format_name: usd
+    drill_fields: [detail*]
+  }
+
+  measure: total_gross_margin {
+    label: "Total Gross Margin"
+    type: sum
+    sql: ${gross_margin} ;;
+    value_format_name: usd
+    drill_fields: [user_id,average_sale_price,total_gross_margin]
+  }
+
   measure: average_sale_price {
     type: average
     sql: ${sale_price} ;;  }
@@ -95,16 +116,16 @@ view: order_items {
   # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
-	id,
-	users.last_name,
-	users.id,
-	users.first_name,
-	inventory_items.id,
-	inventory_items.product_name,
-	products.name,
-	products.id,
-	orders.order_id
-	]
+  id,
+  users.last_name,
+  users.id,
+  users.first_name,
+  inventory_items.id,
+  inventory_items.product_name,
+  products.name,
+  products.id,
+  orders.order_id
+  ]
   }
 
 }
