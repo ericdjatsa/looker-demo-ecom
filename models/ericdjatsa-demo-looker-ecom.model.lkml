@@ -7,12 +7,12 @@ include: "/views/**/*.view.lkml"
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
 
-datagroup: axereal-demo-looker-ecom_default_datagroup {
+datagroup: demo_looker_ecom_default_datagroup {
   # sql_trigger: SELECT MAX(id) FROM etl_log;;
   max_cache_age: "1 hour"
 }
 
-persist_with: axereal-demo-looker-ecom_default_datagroup
+persist_with: demo_looker_ecom_default_datagroup
 
 # Explores allow you to join together different views (database tables) based on the
 # relationships between fields. By joining a view into an Explore, you make those
@@ -28,7 +28,7 @@ persist_with: axereal-demo-looker-ecom_default_datagroup
 explore: users {}
 
 explore: order_items {
-
+  label: "(Eric Djatsa) Order Items, users, Order, Products "
   access_filter: {
     field: users.country
     user_attribute: country
