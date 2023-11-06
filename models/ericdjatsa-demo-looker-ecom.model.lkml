@@ -34,6 +34,11 @@ explore: order_items {
     user_attribute: country
   }
 
+  access_filter: {
+    field: products.brand
+    user_attribute: product_brand
+  }
+
   join: users {
     type: left_outer
     sql_on: ${order_items.user_id} = ${users.id} ;;
