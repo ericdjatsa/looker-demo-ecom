@@ -29,10 +29,10 @@ explore: users {}
 
 explore: order_items {
   label: "(Eric Djatsa) Order Items, users, Order, Products "
-  access_filter: {
-    field: users.country
-    user_attribute: country
-  }
+  # access_filter: {
+  #   field: users.country
+  #   user_attribute: country
+  # }
 
   access_filter: {
     field: products.brand
