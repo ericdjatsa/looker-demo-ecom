@@ -34,10 +34,10 @@ explore: order_items {
   #   user_attribute: country
   # }
 
-  access_filter: {
-    field: products.brand
-    user_attribute: product_brand
-  }
+  # access_filter: {
+  #   field: products.brand
+  #   user_attribute: product_brand
+  # }
 
   join: users {
     type: left_outer
